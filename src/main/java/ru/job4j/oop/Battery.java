@@ -10,6 +10,7 @@ public class Battery {
 
     public void exchange(Battery another) {
         another.load += this.load;
+        this.load = 0;
     }
 
     public static void main(String[] args) {
@@ -17,5 +18,6 @@ public class Battery {
         Battery toyMachine = new Battery(0);
         battery.exchange(toyMachine);
         System.out.println("Charge of toyMachine is: " + toyMachine.load);
+        System.out.println("Charge of battery is: " + battery.load);
     }
 }
