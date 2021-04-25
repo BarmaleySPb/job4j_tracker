@@ -39,8 +39,7 @@ public class Tracker {
                 counter++;
             }
         }
-        newArray = Arrays.copyOf(newArray, counter);
-        return newArray;
+        return Arrays.copyOf(newArray, counter);
     }
 
     public Item[] findAll(Item[] items) {
@@ -52,8 +51,7 @@ public class Tracker {
                 counter++;
             }
         }
-        newArray = Arrays.copyOf(newArray, size);
-        return newArray;
+        return Arrays.copyOf(newArray, size);
     }
 
     public boolean replace(int id, Item item) {
