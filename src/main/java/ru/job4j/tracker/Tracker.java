@@ -25,6 +25,17 @@ public class Tracker {
         return rsl;
     }
 
+    private int indexOf(int id) {
+        int result = -1;
+        for (int i = 0; i < items.length; i++) {
+            if (items[i].getId() == id) {
+                result = i;
+                break;
+            }
+        }
+        return result;
+    }
+
     public Item[] findByName(String key) {
         Item[] newArray = new Item[items.length];
         int counter = 0;
@@ -47,7 +58,7 @@ public class Tracker {
                 counter++;
             }
         }
-        items = Arrays.copyOf(newArray, size);
-        return items;
+        newArray = Arrays.copyOf(newArray, size);
+        return newArray;
     }
 }
