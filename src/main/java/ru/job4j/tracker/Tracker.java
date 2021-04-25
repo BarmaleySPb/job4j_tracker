@@ -22,7 +22,7 @@ public class Tracker {
     private int indexOf(int id) {
         int result = -1;
         for (int i = 0; i < items.length; i++) {
-            if (items[i].getId() == id) {
+            if (items[i] != null && items[i].getId() == id) {
                 result = i;
                 break;
             }
@@ -63,5 +63,16 @@ public class Tracker {
             return true;
         }
         return false;
+    }
+
+    public Item[] delete(int id) {
+        int index = indexOf(id);
+        int startPos = index + 1;
+        int distPos = index;
+        int length = size - index;
+        items[size - 1] = null;
+        size--;
+        System.arraycopy(items, startPos, items, distPos, length);
+        return items;
     }
 }
