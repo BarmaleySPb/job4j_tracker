@@ -12,18 +12,18 @@ public class Library {
         books[1] = second;
         books[2] = third;
         books[3] = fourth;
-        for (int i = 0; i < books.length; i++) {
-            System.out.println(books[i].getName() + " - " + books[i].getValueOfPage() + " pages");
+        for (Book book : books) {
+            System.out.println(book.getName() + " - " + book.getValueOfPage() + " pages");
         }
         Book tempBook = books[0];
         books[0] = books[3];
         books[3] = tempBook;
-        for (int i = 0; i < books.length; i++) {
-            System.out.println(books[i].getName() + " - " + books[i].getValueOfPage() + " pages");
+        for (Book book : books) {
+            System.out.println(book.getName() + " - " + book.getValueOfPage() + " pages");
         }
-        for (int i = 0; i < books.length; i++) {
-            if (books[i].getName().equals("Clean code")) {
-                System.out.println(books[i].getName() + " - " + books[i].getValueOfPage()
+        for (Book book : books) {
+            if ("Clean code".equals(book.getName())) {
+                System.out.println(book.getName() + " - " + book.getValueOfPage()
                         + " pages");
             }
         }
