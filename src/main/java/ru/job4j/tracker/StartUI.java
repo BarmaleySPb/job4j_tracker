@@ -16,5 +16,7 @@ public class StartUI {
         Item result = tracker.findById(1);
         System.out.println();
         System.out.println("search result: " + "\n" + result.getName() + "\n" + result.getId());
+        System.out.println();
+        System.out.println(item);
     }
 }
