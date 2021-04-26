@@ -1,6 +1,5 @@
 package ru.job4j.tracker;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public class Tracker {
@@ -55,14 +54,14 @@ public class Tracker {
     }
 
     public boolean replace(int id, Item item) {
-        if (findById(id) != null) {
-            int index = indexOf(id);
+        int index = indexOf(id);
+        boolean rsl = index != -1;
+        if (rsl) {
             int tempId = items[index].getId();
             items[index] = item;
             items[item.getId()].setId(tempId);
-            return true;
         }
-        return false;
+        return rsl;
     }
 
     public boolean delete(int id) {
