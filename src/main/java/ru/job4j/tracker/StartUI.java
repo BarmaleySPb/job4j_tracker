@@ -1,22 +1,100 @@
 package ru.job4j.tracker;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class StartUI {
 
+    public void init(Scanner scanner, Tracker tracker) {
+        boolean run = true;
+        while (run) {
+            this.showMenu();
+            System.out.print("Select: ");
+            int select = Integer.parseInt(scanner.nextLine());
+            if (select == 0) {
+                System.out.println("==== Create a new Item ====");
+                System.out.print("Enter name: ");
+                String name = scanner.nextLine();
+                Item item = new Item(name);
+                tracker.add(item);
+            }
+            if (select == 1) {
+                System.out.println("==== All items ====");
+                Item[] arrayItems = tracker.findAll(); //check
+                if (arrayItems.length != 0) {
+                    for (Item items : arrayItems) {
+                        System.out.println(items.toString());
+                    }
+                } else {
+                    System.out.println("Заявки отсутствуют.");
+                }
+            }
+            if (select == 2) {
+                System.out.println("==== Edit new item ====");
+                System.out.print("Enter ID: ");
+                int id = Integer.parseInt(scanner.nextLine());
+                System.out.print("Enter item's name: ");
+                String itemsName = scanner.nextLine();
+                if (tracker.replace(id, new Item(itemsName))) {
+                    System.out.println("Заявка успешно изменена.");
+                } else {
+                    System.out.println("Заявка с ID: " + id + " не найдена");
+                }
+            }
+            if (select == 3) {
+                System.out.println("==== Delete item ====");
+                System.out.print("Enter ID: ");
+                int id = Integer.parseInt(scanner.nextLine());
+                if (tracker.delete(id)) {
+                    System.out.println("Заявка успешно удалена.");
+                } else {
+                    System.out.println("Заявка с таким ID не найдена.");
+                }
+            }
+            if (select == 4) {
+                System.out.println("==== Find item by ID ====");
+                System.out.print("Enter ID: ");
+                int id = Integer.parseInt(scanner.nextLine());
+                if (tracker.findById(id) != null) {
+                    System.out.println(tracker.findById(id).toString());
+                } else {
+                    System.out.println("Заявка с таким ID не найдена");
+                }
+            }
+            if (select == 5) {
+                System.out.println("==== Find items by name ====");
+                System.out.print("Enter name of item: ");
+                String itemName = scanner.nextLine();
+                Item[] findItems = tracker.findByName(itemName);
+                if (findItems.length != 0) {
+                    for (Item items : findItems) {
+                        System.out.println(items.toString());
+                    }
+                } else {
+                    System.out.println("Заявки с таким именем не найдены");
+                }
+            } else if (select == 6) {
+                run = false;
+            }
+            if (select < 0 || select > 6) {
+                System.out.println("Введено недопустимое значение!!!");
+            }
+        }
+    }
+
+    private void showMenu() {
+        System.out.println("   Menu.");
+        System.out.println("0. Add new Item");
+        System.out.println("1. Show all items");
+        System.out.println("2. Edit item");
+        System.out.println("3. Delete item");
+        System.out.println("4. Find item by Id");
+        System.out.println("5. Find items by name");
+        System.out.println("6. Exit Program");
+    }
+
     public static void main(String[] args) {
-        Item item = new Item();
-        item.setName("First item");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-        item.setCreated(LocalDateTime.now());
-        System.out.println(item.getCreated().format(formatter));
+        Scanner scanner = new Scanner(System.in);
         Tracker tracker = new Tracker();
-        tracker.add(item);
-        Item result = tracker.findById(1);
-        System.out.println();
-        System.out.println("search result: " + "\n" + result.getName() + "\n" + result.getId());
-        System.out.println();
-        System.out.println(item);
+        new StartUI().init(scanner, tracker);
     }
 }

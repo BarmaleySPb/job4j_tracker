@@ -41,7 +41,7 @@ public class Tracker {
         return Arrays.copyOf(newArray, counter);
     }
 
-    public Item[] findAll(Item[] items) {
+    public Item[] findAll() {
         Item[] newArray = new Item[size];
         int counter = 0;
         for (int i = 0; i < size; i++) {
@@ -59,7 +59,7 @@ public class Tracker {
         if (rsl) {
             int tempId = items[index].getId();
             items[index] = item;
-            items[item.getId()].setId(tempId);
+            items[index].setId(tempId);
         }
         return rsl;
     }
