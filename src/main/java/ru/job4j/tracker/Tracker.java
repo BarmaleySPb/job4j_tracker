@@ -7,10 +7,9 @@ public class Tracker {
     private int ids = 1;
     private int size = 0;
 
-    public Item add(Item item) {
+    public void add(Item item) {
         item.setId(ids++);
         items[size++] = item;
-        return item;
     }
 
     public Item findById(int id) {
@@ -42,15 +41,7 @@ public class Tracker {
     }
 
     public Item[] findAll() {
-        Item[] newArray = new Item[size];
-        int counter = 0;
-        for (int i = 0; i < size; i++) {
-            if (items[i] != null) {
-                newArray[counter] = items[i];
-                counter++;
-            }
-        }
-        return Arrays.copyOf(newArray, size);
+        return Arrays.copyOf(items, size);
     }
 
     public boolean replace(int id, Item item) {

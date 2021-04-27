@@ -66,12 +66,12 @@ public class StartUI {
                 System.out.print("Enter name of item: ");
                 String itemName = scanner.nextLine();
                 Item[] findItems = tracker.findByName(itemName);
-                if (findItems.length != 0) {
+                if (findItems.length > 0) {
                     for (Item items : findItems) {
                         System.out.println(items);
                     }
                 } else {
-                    System.out.println("Заявки с таким именем не найдены");
+                    System.out.println("Заявки с именем: " + itemName + " не найдены");
                 }
             } else if (select == 6) {
                 run = false;
