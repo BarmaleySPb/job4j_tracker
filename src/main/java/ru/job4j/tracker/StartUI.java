@@ -33,7 +33,7 @@ public class StartUI {
                 System.out.println("==== Edit new item ====");
                 System.out.print("Enter ID: ");
                 int id = Integer.parseInt(scanner.nextLine());
-                System.out.print("Enter item's name: ");
+                System.out.print("Enter name: ");
                 String itemsName = scanner.nextLine();
                 if (tracker.replace(id, new Item(itemsName))) {
                     System.out.println("Заявка успешно изменена.");
