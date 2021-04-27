@@ -20,13 +20,13 @@ public class StartUI {
             }
             if (select == 1) {
                 System.out.println("==== All items ====");
-                Item[] arrayItems = tracker.findAll(); //check
-                if (arrayItems.length != 0) {
+                Item[] arrayItems = tracker.findAll();
+                if (arrayItems.length > 0) {
                     for (Item items : arrayItems) {
                         System.out.println(items);
                     }
                 } else {
-                    System.out.println("Заявки отсутствуют.");
+                    System.out.println("Хранилище еще не содержит заявок.");
                 }
             }
             if (select == 2) {
