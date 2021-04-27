@@ -7,7 +7,7 @@ public class StartUI {
         while (run) {
             this.showMenu();
             System.out.print("Select: ");
-            int select = Integer.parseInt(input.askStr());
+            int select = input.askInt();
             if (select == 0) {
                 System.out.println("==== Create a new Item ====");
                 String name = input.askStr("Enter name: ");
@@ -28,8 +28,7 @@ public class StartUI {
             }
             if (select == 2) {
                 System.out.println("==== Edit new item ====");
-                System.out.print("Enter ID: ");
-                int id = Integer.parseInt(input.askStr("Enter ID: "));
+                int id = input.askInt("Enter ID: ");
                 String itemsName = input.askStr("Enter name: ");
                 if (tracker.replace(id, new Item(itemsName))) {
                     System.out.println("Заявка успешно изменена.");
@@ -39,7 +38,7 @@ public class StartUI {
             }
             if (select == 3) {
                 System.out.println("==== Delete item ====");
-                int id = Integer.parseInt(input.askStr("Enter ID: "));
+                int id = input.askInt("Enter ID: ");
                 if (tracker.delete(id)) {
                     System.out.println("Заявка успешно удалена.");
                 } else {
@@ -48,7 +47,7 @@ public class StartUI {
             }
             if (select == 4) {
                 System.out.println("==== Find item by ID ====");
-                int id = Integer.parseInt(input.askStr("Enter ID: "));
+                int id = input.askInt("Enter ID: ");
                 Item find = tracker.findById(id);
                 if (find != null) {
                     System.out.println(find);
