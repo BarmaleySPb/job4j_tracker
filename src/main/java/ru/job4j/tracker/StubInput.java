@@ -8,6 +8,11 @@ public class StubInput implements Input {
     }
 
     @Override
+    public String askStr() {
+        return null;
+    }
+
+    @Override
     public int askInt(String question) {
         return 0;
     }
