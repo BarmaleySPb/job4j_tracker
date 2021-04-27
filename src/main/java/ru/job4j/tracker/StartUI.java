@@ -48,7 +48,7 @@ public class StartUI {
                 if (tracker.delete(id)) {
                     System.out.println("Заявка успешно удалена.");
                 } else {
-                    System.out.println("Заявка с таким ID не найдена.");
+                    System.out.println("Заявка с ID" + id + " не найдена.");
                 }
             }
             if (select == 4) {
