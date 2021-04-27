@@ -12,19 +12,7 @@ public class ConsoleInput implements Input {
     }
 
     @Override
-    public String askStr() {
-        return scanner.nextLine();
-    }
-
-    @Override
     public int askInt(String question) {
-        System.out.println(question);
-        return scanner.nextInt();
-
-    }
-
-    @Override
-    public int askInt() {
-        return scanner.nextInt();
+        return Integer.parseInt(askStr(question));
     }
 }
