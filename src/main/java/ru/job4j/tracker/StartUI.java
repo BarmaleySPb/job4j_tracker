@@ -17,15 +17,15 @@ public class StartUI {
                 UserAction action = actions[select];
                 run = action.execute(input, tracker);
             } else {
-                System.out.println("Введено недопустимое значение! Повторите ввод.");
+                out.println("Введено недопустимое значение! Повторите ввод.");
             }
         }
     }
 
     private void showMenu(UserAction[] actions) {
-        System.out.println("Menu.");
+        out.println("Menu.");
         for (int index = 0; index < actions.length; index++) {
-            System.out.println(index + ". " + actions[index].name());
+            out.println(index + ". " + actions[index].name());
         }
     }
 

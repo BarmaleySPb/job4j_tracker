@@ -15,14 +15,14 @@ public class ShowAllAction implements UserAction {
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        System.out.println("==== All items ====");
+        out.println("==== All items ====");
         Item[] arrayItems = tracker.findAll();
         if (arrayItems.length > 0) {
             for (Item items : arrayItems) {
-                System.out.println(items);
+                out.println(items);
             }
         } else {
-            System.out.println("Хранилище еще не содержит заявок.");
+            out.println("Хранилище еще не содержит заявок.");
         }
         return true;
     }
