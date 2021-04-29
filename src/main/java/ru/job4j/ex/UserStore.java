@@ -11,21 +11,30 @@ public class UserStore {
         throw new UserNotFoundException("User not found");
     }
 
-//    public static boolean validate(User user) throws UserInvalidException {
-//        char[] chars = user.getUsername().toCharArray();
-//     //   if (chars.length <= 3) {
-//        // дописать!!!!!!!!!!!!!!!!!!!!!
-//        }
-//        return false;
-//    }
-//
-//    public static void main(String[] args) {
-//        User[] users = {
-//                new User("Petr Arsentev", true)
-//        };
-////        User user = findUser(users, "Petr Arsentev");
-////        if (validate(user)) {
-////            System.out.println("This user has an access");
-////        }
-//    }
+    public static boolean validate(User user) throws UserInvalidException {
+        if ((user.isValid()) && user.getUsername().length() > 3) {
+            return true;
+        }
+        throw new UserInvalidException("User not valid");
+    }
+
+    public static void main(String[] args) throws UserNotFoundException, UserInvalidException {
+        User[] users = {
+                new User("Petr Arsentev", true),
+                new User("Asd", true),
+                new User("Qwer", false)
+        };
+        try {
+            for (int i = 0; i < users.length; i++) {
+                findUser(users, users[i].getUsername());
+                if (validate(users[i])) {
+                    System.out.println(users[i].getUsername() + " This user has an access");
+                }
+            }
+        } catch (UserInvalidException uie) {
+            uie.printStackTrace();
+        } catch (UserNotFoundException unfe) {
+            unfe.printStackTrace();
+        }
+    }
 }
