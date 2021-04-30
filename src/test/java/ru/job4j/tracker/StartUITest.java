@@ -25,10 +25,9 @@ public class StartUITest {
 
     @Test
     public void whenCreateItem() {
-        String name = "new";
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"0", name, "1"}
+                new String[] {"0", "new", "1"}
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = {
@@ -36,7 +35,7 @@ public class StartUITest {
                 new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
-        Item newItem = tracker.findById(1);
+        Item newItem = tracker.findAll()[0];
         assertThat(out.toString(), is(
                 "Menu." + System.lineSeparator()
                         + "0. Add new Item" + System.lineSeparator()
@@ -122,13 +121,12 @@ public class StartUITest {
                 new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
-        Item findItem = tracker.findById(newItem.getId());
         assertThat(out.toString(), is(
                 "Menu." + System.lineSeparator()
                         + "0. Find item by ID" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
                         + "==== Find item by ID ====" + System.lineSeparator()
-                        + findItem + System.lineSeparator()
+                        + newItem + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. Find item by ID" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
@@ -151,13 +149,12 @@ public class StartUITest {
                 new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
-        Item[] findItem = tracker.findByName(second.getName());
         assertThat(out.toString(), is(
                 "Menu." + System.lineSeparator()
                         + "0. Find items by name" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
                         + "==== Find items by name ====" + System.lineSeparator()
-                        + findItem[first.getId() - 1] + System.lineSeparator()
+                        + second + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. Find items by name" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
