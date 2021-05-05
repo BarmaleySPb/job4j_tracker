@@ -10,12 +10,8 @@ public class ConvertList2Array {
         int[][] array = new int[groups][cells];
         int row = 0, cell = 0;
         for (Integer num : list) {
-            if (row < 3) {
-                array[row][cell] = num;
-                cell++;
-                if (cell < 3) {
-                    continue;
-                }
+            array[row][cell++] = num;
+            if (cell == cells) {
                 cell = 0;
                 row++;
             }
