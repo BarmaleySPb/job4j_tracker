@@ -3,6 +3,7 @@ package ru.job4j.tracker;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -36,7 +37,7 @@ public class StartUITest {
                 actions.add(new CreateAction(out));
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
-        ArrayList<Item> findItem = tracker.findAll();
+        List<Item> findItem = tracker.findAll();
         Item newItem = findItem.get(0); //tracker.findAll()[0];
         assertThat(out.toString(), is(
                 "Menu." + System.lineSeparator()
