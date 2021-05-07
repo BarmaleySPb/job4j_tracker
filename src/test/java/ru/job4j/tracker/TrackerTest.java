@@ -1,6 +1,11 @@
 package ru.job4j.tracker;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -56,5 +61,21 @@ public class TrackerTest {
         int id = bug.getId();
         tracker.delete(id);
         assertThat(tracker.findById(id), is(nullValue()));
+    }
+
+    @Test
+    public void sortt() {
+        Tracker tracker = new Tracker();
+        Item first = new Item("first");
+        Item second = new Item("second");
+        Item third = new Item("third");
+        tracker.add(first);
+        tracker.add(second);
+        tracker.add(third);
+        List<Item> items = new ArrayList<>(tracker.findAll());
+        Assert.assertThat(ItemSorter.sort(items).toString(), is("[" + first + ", "
+                + second + ", " + third + "]"));
+        Assert.assertThat(ItemSorter.sortRevers(items).toString(), is("[" + third + ", "
+                + second + ", " + first + "]"));
     }
 }
