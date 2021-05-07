@@ -13,10 +13,12 @@ public class BankService {
     }
 
     public void addAccount(String passport, Account account) {
-        List<Account> accounts = users.get(findByPassport(passport));
-        if (!accounts.contains(account)) {
-            accounts.add(account);
-            users.put(findByPassport(passport), accounts);
+        User findUser = findByPassport(passport);
+        if (findUser != null) {
+            List<Account> accounts = users.get(findUser);
+            if (!accounts.contains(account)) {
+                accounts.add(account);
+            }
         }
     }
 
@@ -30,8 +32,9 @@ public class BankService {
     }
 
     public Account findByRequisite(String passport, String requisite) {
-        List<Account> accounts = users.get(findByPassport(passport));
-        if (accounts != null) {
+        User findUser = findByPassport(passport);
+        if (findUser != null) {
+            List<Account> accounts = users.get(findUser);
             for (Account account : accounts) {
                 if (account.getRequisite().equals(requisite)) {
                     return account;
@@ -45,13 +48,12 @@ public class BankService {
                                  String destPassport, String destRequisite, double amount) {
         Account source = findByRequisite(srcPassport, srcRequisite);
         Account destination = findByRequisite(destPassport, destRequisite);
-        if (source != null && destination != null) {
-            if (source.getBalance() >= amount) {
-                source.setBalance(source.getBalance() - amount);
-                destination.setBalance(destination.getBalance() + amount);
-                return true;
-            }
+        if (source != null && destination != null && source.getBalance() >= amount) {
+            source.setBalance(source.getBalance() - amount);
+            destination.setBalance(destination.getBalance() + amount);
+            return true;
         }
+
         return false;
     }
 }
