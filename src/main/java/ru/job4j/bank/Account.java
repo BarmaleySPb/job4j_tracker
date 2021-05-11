@@ -2,11 +2,22 @@ package ru.job4j.bank;
 
 import java.util.Objects;
 
+/**
+ * Класс описывает модель счета
+ *
+ * @author Zakharov Evgeny
+ * @version 1.0
+ */
 public class Account {
 
     private String requisite;
     private double balance;
 
+    /**
+     * конструктор класса
+     * @param requisite реквизиты счета
+     * @param balance баланс счета
+     */
     public Account(String requisite, double balance) {
         this.requisite = requisite;
         this.balance = balance;

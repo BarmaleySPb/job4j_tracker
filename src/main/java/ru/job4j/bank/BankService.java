@@ -5,13 +5,35 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * класс описывает работу простейшего банковкого сервиса
+ *
+ * @author Zakharov Evgeny
+ * @version 1.0
+ */
 public class BankService {
+    /**
+     * Хранение данных сервиса осуществляется в карте Map, в качестве ключа используем User
+     */
     private Map<User, List<Account>> users = new HashMap<>();
 
+    /**
+     * метод принимает на вход модель User, при отсутствии в списке клиентов,
+     * создает нового с дефолтным списком счетов.
+     *
+     * @param user модель клиета, содержит номер паспорта и список счетов
+     */
     public void addUser(User user) {
         users.putIfAbsent(user, new ArrayList<Account>());
     }
 
+    /**
+     * метод принимает пасспорт и счет клиента, при нахождении в списке клиентов,
+     * проверяет наличие счета, при его отсутствии добавляет в список счетов.
+     *
+     * @param passport номер паспорта клиента.
+     * @param account  счет, который добавляется к списку счетов
+     */
     public void addAccount(String passport, Account account) {
         User findUser = findByPassport(passport);
         if (findUser != null) {
@@ -22,6 +44,12 @@ public class BankService {
         }
     }
 
+    /**
+     * метод осуществляет поиск клиента по номеру паспорта
+     *
+     * @param passport номер пасспрта по которому осуществляется поиск клиента
+     * @return возвращает клиента, если клиент не найден возвращает null.
+     */
     public User findByPassport(String passport) {
         for (User user : users.keySet()) {
             if (user.getPassport().equals(passport)) {
@@ -31,6 +59,13 @@ public class BankService {
         return null;
     }
 
+    /**
+     * метод осуществляет поиск счета по реквизитам
+     *
+     * @param passport  номер паспорта клиента для проверки
+     * @param requisite реквизиты счета
+     * @return возвращает счет клиента, если счет не найден возвращает null.
+     */
     public Account findByRequisite(String passport, String requisite) {
         User findUser = findByPassport(passport);
         if (findUser != null) {
@@ -44,6 +79,17 @@ public class BankService {
         return null;
     }
 
+    /**
+     * метод осуществляет денежный перевод со счета клиента на другой счет
+     *
+     * @param srcPassport   паспорт клиента отправителя
+     * @param srcRequisite  реквизиты счета отправителя
+     * @param destPassport  паспорт получателя перевода
+     * @param destRequisite реквизиты счета получателя
+     * @param amount        сумма перевода
+     * @return возвращает true в случае успешного перевода, либо null в случае
+     * если перевод не был осуществлен.
+     */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         Account source = findByRequisite(srcPassport, srcRequisite);
