@@ -28,7 +28,6 @@ public class Departments {
     public static void main(String[] args) {
         List<String> list = Arrays.asList("k2/sk1/sk2/sk3", "k1/sk1", "k2", "k2/sk1/sk2/sk5");
         list = fillGaps(list);
-    //    sortAsc(list);
         sortDesc(list);
         for (String item : list) {
             System.out.println(item);
