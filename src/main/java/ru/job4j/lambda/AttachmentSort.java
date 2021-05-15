@@ -13,7 +13,7 @@ public class AttachmentSort {
                 new Attachment("image 3", 13)
         );
 
-        Comparator<Attachment> comparatorSize = (left, right) -> left.getSize() - right.getSize();
+        Comparator<Attachment> comparatorSize = (left, right) -> Integer.compare(right.getSize(), left.getSize());
         attachments.sort(comparatorSize);
         System.out.println(attachments);
 
