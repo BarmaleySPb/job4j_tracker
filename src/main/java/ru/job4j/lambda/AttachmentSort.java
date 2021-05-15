@@ -13,11 +13,13 @@ public class AttachmentSort {
                 new Attachment("image 3", 13)
         );
 
-        Comparator<Attachment> comparatorSize = (left, right) -> Integer.compare(right.getSize(), left.getSize());
+        Comparator<Attachment> comparatorSize = (left, right) ->
+                Integer.compare(right.getSize(), left.getSize());
         attachments.sort(comparatorSize);
         System.out.println(attachments);
 
-        Comparator<Attachment> comparatorName = (left, right) -> left.getName().compareTo(right.getName());
+        Comparator<Attachment> comparatorName = (left, right) ->
+                left.getName().compareTo(right.getName());
         attachments.sort(comparatorName);
         System.out.println(attachments);
     }
