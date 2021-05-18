@@ -8,10 +8,10 @@ public class Students {
 
     public static Map<String, Student> convertToMap(List<Student> students) {
         return students.stream()
-                .distinct()
                 .collect(Collectors.toMap(
                         e -> e.getSurname(),
-                        e -> e
+                        e -> e,
+                        (e1, e2) -> e1.equals(e2) ? e1 : e2
                 ));
 
     }

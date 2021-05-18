@@ -20,7 +20,8 @@ public class StudentsTest {
                 new Student(50, "Surname5"),
                 new Student(50, "Surname5"),
                 new Student(60, "Surname6"),
-                new Student(80, "Surname8")
+                new Student(80, "Surname8"),
+                new Student(90, "Surname8")
         );
         Map<String, Student> result = Students.convertToMap(students);
         Map<String, Student> expected = new HashMap<>();
@@ -29,6 +30,7 @@ public class StudentsTest {
         expected.put("Surname5", students.get(3));
         expected.put("Surname6", students.get(5));
         expected.put("Surname8", students.get(6));
+        expected.put("Surname8", students.get(7));
         assertThat(result, is(expected));
     }
 }
