@@ -13,6 +13,8 @@ public class ArrayToList {
         for (Integer[] elem : array) {
             matrix.add(new ArrayList<>(asList(elem)));
         }
-        return matrix.stream().flatMap(e -> e.stream()).collect(Collectors.toList());
+        return matrix.stream()
+                .flatMap(e -> e.stream())
+                .collect(Collectors.toList());
     }
 }
