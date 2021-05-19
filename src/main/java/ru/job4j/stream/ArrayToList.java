@@ -1,20 +1,15 @@
 package ru.job4j.stream;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Arrays.asList;
+import java.util.stream.Stream;
 
 public class ArrayToList {
 
     public static List<Integer> twoDimArray(Integer[][] array) {
-        List<List<Integer>> matrix = new ArrayList<>();
-        for (Integer[] elem : array) {
-            matrix.add(new ArrayList<>(asList(elem)));
-        }
-        return matrix.stream()
-                .flatMap(e -> e.stream())
+        return Arrays.stream(array)
+                .flatMap(Stream::of)
                 .collect(Collectors.toList());
     }
 }
