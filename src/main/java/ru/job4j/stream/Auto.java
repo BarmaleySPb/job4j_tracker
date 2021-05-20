@@ -25,38 +25,6 @@ public class Auto {
                 + '}';
     }
 
-    public String getModel() {
-        return model;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public byte getDoors() {
-        return doors;
-    }
-
-    public byte getWheels() {
-        return wheels;
-    }
-
-    public int getEngine() {
-        return engine;
-    }
-
-    public int getBagCapacity() {
-        return bagCapacity;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
     static class Builder {
         private String model;
         private String type;
