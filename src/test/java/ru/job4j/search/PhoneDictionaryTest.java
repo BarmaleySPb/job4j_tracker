@@ -11,7 +11,7 @@ public class PhoneDictionaryTest {
 
     @Test
     public void whenFindByName() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
@@ -21,17 +21,17 @@ public class PhoneDictionaryTest {
 
     @Test
     public void whenFindNothin() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
-        ArrayList<Person> persons = phones.find("Vasiliy");
+        var persons = phones.find("Vasiliy");
         assertTrue(persons.isEmpty());
     }
 
     @Test
     public void whenFindBySurname() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
@@ -41,13 +41,13 @@ public class PhoneDictionaryTest {
         phones.add(
                 new Person("Ivan", "Ivanow", "734872", "Murmansk")
         );
-        ArrayList<Person> persons = phones.find("Vasin");
+        var persons = phones.find("Vasin");
         assertThat(persons.get(0).getName(), is("Vasiliy"));
     }
 
     @Test
     public void whenFindByPhone() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
@@ -57,13 +57,13 @@ public class PhoneDictionaryTest {
         phones.add(
                 new Person("Ivan", "Ivanov", "734872", "Murmansk")
         );
-        ArrayList<Person> persons = phones.find("734872");
+        var persons = phones.find("734872");
         assertThat(persons.get(0).getSurname(), is("Ivanov"));
     }
 
     @Test
     public void whenFindByAddress() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
@@ -73,7 +73,7 @@ public class PhoneDictionaryTest {
         phones.add(
                 new Person("Ivan", "Ivanow", "734872", "Murmansk")
         );
-        ArrayList<Person> persons = phones.find("Moscow");
+        var persons = phones.find("Moscow");
         assertThat(persons.get(0).getSurname(), is("Vasin"));
     }
 }
