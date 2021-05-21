@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 public class LexSortTest {
+
     @Test
     public void sortNum1and2and10() {
         String[] input = {
