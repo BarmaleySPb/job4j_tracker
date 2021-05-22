@@ -2,6 +2,7 @@ package ru.job4j.stream;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,6 @@ public class StudentsTest {
         expected.put("Surname5", students.get(3));
         expected.put("Surname6", students.get(5));
         expected.put("Surname8", students.get(6));
-        expected.put("Surname8", students.get(7));
         assertThat(result, is(expected));
     }
 }
