@@ -63,14 +63,10 @@ public class BankService {
      */
     public Optional<Account> findByRequisite(String passport, String requisite) {
         Optional<User> findUser = findByPassport(passport);
-        Optional<Account> findAccount = Optional.empty();
-        if (findUser.isPresent()) {
-            return users.get(findUser.get()).stream()
-                    .filter(a -> a.getRequisite().equals(requisite))
-                    .findFirst();
-            }
-        return findAccount;
-        }
+        return findUser.flatMap(user -> users.get(user).stream()
+                .filter(a -> a.getRequisite().equals(requisite))
+                .findFirst());
+    }
 
     /**
      * метод осуществляет денежный перевод со счета клиента на другой счет
