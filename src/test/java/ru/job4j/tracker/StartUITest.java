@@ -16,7 +16,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         ArrayList<UserAction> actions = new ArrayList<>();
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
@@ -32,7 +32,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "new", "1"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         ArrayList<UserAction> actions = new ArrayList<>();
                 actions.add(new CreateAction(out));
                 actions.add(new ExitAction(out));
@@ -53,7 +53,7 @@ public class StartUITest {
 
     @Test
     public void whenReplaceItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item newItem = new Item("new");
         String newName = "replace";
         tracker.add(newItem);
@@ -83,7 +83,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "1"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item first = new Item("first");
         Item second = new Item("second");
         Item third = new Item("third");
@@ -110,7 +110,7 @@ public class StartUITest {
 
     @Test
     public void whenFindById() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item newItem = new Item("new");
         tracker.add(newItem);
         Output out = new StubOutput();
@@ -139,7 +139,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "second", "1"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item first = new Item("first");
         Item second = new Item("second");
         tracker.add(first);
@@ -166,7 +166,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"1", "0"/* Пункты меню: неверный, верный. */}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         ArrayList<UserAction> actions = new ArrayList<>();
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
