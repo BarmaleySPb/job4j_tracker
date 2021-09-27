@@ -38,7 +38,7 @@ public class StartUITest {
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
         List<Item> findItem = tracker.findAll();
-        Item newItem = findItem.get(0); //tracker.findAll()[0];
+        Item newItem = findItem.get(0);
         assertThat(out.toString(), is(
                 "Menu." + System.lineSeparator()
                         + "0. Add new Item" + System.lineSeparator()
