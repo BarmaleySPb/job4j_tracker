@@ -2,7 +2,6 @@ package ru.job4j.collection;
 
 import org.junit.Test;
 
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class PassportOfficeTest {
@@ -12,7 +11,7 @@ public class PassportOfficeTest {
         Citizen citizen = new Citizen("2f44a", "Petr Arsentev");
         PassportOffice office = new PassportOffice();
         office.add(citizen);
-        assertThat(office.get(citizen.getPassport()), is(citizen));
+        assertEquals(office.get(citizen.getPassport()), citizen);
     }
 
     @Test
@@ -22,6 +21,6 @@ public class PassportOfficeTest {
         PassportOffice office = new PassportOffice();
         office.add(citizen);
         assertFalse(office.add(citizenWithSamePassport));
-        assertThat(office.get(citizen.getPassport()), is(citizen));
+        assertEquals(office.get(citizen.getPassport()), citizen);
     }
 }

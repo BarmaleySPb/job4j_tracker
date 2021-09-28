@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class ValidateInputTest {
 
@@ -15,7 +15,7 @@ public class ValidateInputTest {
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Select: ");
-        assertThat(selected, is(1));
+        assertEquals(selected, 1);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class ValidateInputTest {
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Select: ");
-        assertThat(selected, is(1));
+        assertEquals(selected, 1);
     }
 
     @Test
@@ -39,9 +39,9 @@ public class ValidateInputTest {
         int first = input.askInt("Select: ");
         int second = input.askInt("Select: ");
         int third = input.askInt("Select: ");
-        assertThat(first, is(1));
-        assertThat(second, is(2));
-        assertThat(third, is(3));
+        assertEquals(first, 1);
+        assertEquals(second, 2);
+        assertEquals(third, 3);
     }
 
     @Test
@@ -52,6 +52,6 @@ public class ValidateInputTest {
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Select: ");
-        assertThat(selected, is(-2));
+        assertEquals(selected, -2);
     }
 }
