@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/BarmaleySPb/job4j_tracker/branch/master/graph/badge.svg)](https://codecov.io/gh/BarmaleySPb/job4j_tracker)
 
 ## Описание
-Проект представляет собой консольное приложение CRUD-системы заявок.
+Проект представляет собой консольное приложение CRUD-системы заявок. Заявки сохраняются в БД.
 Главный класс - ru.job4j.tracker.StartUI.
 
 С заявками возможно выполнять следующие действия:
