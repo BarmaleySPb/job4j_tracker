@@ -20,7 +20,7 @@ public class SearchFolderTest {
         List<Folder> expected = List.of(new Folder("fix", 110));
         Predicate<Folder> pred = f -> f.getSize() > 100;
         List<Folder> rsl = SearchFolder.filter(list, pred);
-        assertThat(rsl, is(expected));
+        assertEquals(rsl, expected);
     }
 
     @Test
@@ -36,6 +36,6 @@ public class SearchFolderTest {
         );
         Predicate<Folder> pred = f -> f.getName().contains("bug");
         List<Folder> rsl = SearchFolder.filter(list, pred);
-        assertThat(rsl, is(expected));
+        assertEquals(rsl, expected);
     }
 }

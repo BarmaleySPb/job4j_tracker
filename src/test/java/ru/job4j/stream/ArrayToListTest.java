@@ -18,7 +18,7 @@ public class ArrayToListTest {
                 {11}
         };
         List<Integer> expected = List.of(1, 2, 2, 4, 5, 7, 8, 9, 11);
-        assertThat(ArrayToList.twoDimArray(array), is(expected));
+        assertEquals(ArrayToList.twoDimArray(array), expected);
     }
 
     @Test
@@ -30,6 +30,6 @@ public class ArrayToListTest {
                 {10, 11, 12}
         };
         List<Integer> expected = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-        assertThat(ArrayToList.twoDimArray(array), is(expected));
+        assertEquals(ArrayToList.twoDimArray(array), expected);
     }
 }

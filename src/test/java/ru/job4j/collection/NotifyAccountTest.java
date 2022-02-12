@@ -22,7 +22,7 @@ public class NotifyAccountTest {
                         new Account("142", "Petr Arsentev", "000001")
                 )
         );
-        assertThat(NotifyAccount.sent(accounts), is(expect));
+        assertEquals(NotifyAccount.sent(accounts), expect);
     }
 
     @Test
@@ -40,6 +40,6 @@ public class NotifyAccountTest {
                         new Account("333", "Vasiliy Vasin", "4564bnmb")
                 )
         );
-        assertThat(NotifyAccount.sent(accounts), is(expect));
+        assertEquals(NotifyAccount.sent(accounts), expect);
     }
 }

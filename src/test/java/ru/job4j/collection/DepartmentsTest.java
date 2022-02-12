@@ -3,6 +3,7 @@ package ru.job4j.collection;
 import org.junit.Test;
 import java.util.List;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class DepartmentsTest {
@@ -13,7 +14,7 @@ public class DepartmentsTest {
         List<String> expect = List.of("k1", "k1/sk1", "k2", "k2/sk1", "k2/sk1/sk2",
                 "k2/sk1/sk2/sk3");
         List<String> result = Departments.fillGaps(input);
-        assertThat(result, is(expect));
+        assertEquals(result, expect);
     }
 
     @Test
@@ -21,7 +22,7 @@ public class DepartmentsTest {
         List<String> input = List.of("k1", "k1/sk1");
         List<String> expect = List.of("k1", "k1/sk1");
         List<String> result = Departments.fillGaps(input);
-        assertThat(result, is(expect));
+        assertEquals(result, expect);
     }
 
     @Test
@@ -32,7 +33,7 @@ public class DepartmentsTest {
         Departments.sortDesc(input);
         List<String> expected = List.of("k4", "k4/sk1", "k2", "k2/sk1", "k2/sk1/sk2",
                 "k2/sk1/sk2/sk3", "k2/sk1/sk2/sk5", "k1", "k1/sk1");
-        assertThat(input, is(expected));
+        assertEquals(input, expected);
     }
 
     @Test
@@ -43,6 +44,6 @@ public class DepartmentsTest {
         Departments.sortAsc(input);
         List<String> expected = List.of("k1", "k1/sk1", "k2", "k2/sk1", "k2/sk1/sk2",
                 "k2/sk1/sk2/sk3", "k2/sk1/sk2/sk5", "k4", "k4/sk1");
-        assertThat(input, is(expected));
+        assertEquals(input, expected);
     }
 }

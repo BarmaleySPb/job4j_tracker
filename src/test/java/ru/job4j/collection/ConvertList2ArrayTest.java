@@ -4,7 +4,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class ConvertList2ArrayTest {
 
@@ -19,6 +19,6 @@ public class ConvertList2ArrayTest {
                 {4, 5, 6},
                 {7, 0, 0}
         };
-        assertThat(result, is(expect));
+        assertArrayEquals(result, expect);
     }
 }

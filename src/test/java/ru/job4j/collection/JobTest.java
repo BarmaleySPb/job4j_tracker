@@ -6,6 +6,7 @@ import java.util.Comparator;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThan;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class JobTest {
 
@@ -18,7 +19,7 @@ public class JobTest {
                 new Job("Impl task", 0),
                 new Job("Fix bug", 1)
         );
-        assertThat(rsl, greaterThan(0));
+        assertTrue(rsl > 0);
     }
 
     @Test
@@ -28,7 +29,7 @@ public class JobTest {
                 new Job("Impl task", 0),
                 new Job("Fix bug", 1)
         );
-        assertThat(rsl, greaterThan(0));
+        assertTrue(rsl > 0);
     }
 
     @Test
@@ -38,7 +39,7 @@ public class JobTest {
                 new Job("Impl task", 0),
                 new Job("Fix bug", 1)
         );
-        assertThat(rsl, greaterThan(0));
+        assertTrue(rsl > 0);
     }
 
     @Test
@@ -48,7 +49,7 @@ public class JobTest {
                 new Job("Impl ask", 0),
                 new Job("Fix bug", 1)
         );
-        assertThat(rsl, lessThan(0));
+        assertTrue(rsl < 0);
     }
 
     @Test
@@ -58,7 +59,7 @@ public class JobTest {
                 new Job("Impl ask", 0),
                 new Job("Fix bug", 1)
         );
-        assertThat(rsl, lessThan(0));
+        assertTrue(rsl < 0);
     }
 
     @Test
@@ -70,6 +71,6 @@ public class JobTest {
                 new Job("Fix bug", 0),
                 new Job("Fix bug", 1)
         );
-        assertThat(rsl, greaterThan(0));
+        assertTrue(rsl > 0);
     }
 }

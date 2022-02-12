@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.*;
 
 public class SqlTrackerTest {
@@ -57,7 +55,7 @@ public class SqlTrackerTest {
         SqlTracker tracker = new SqlTracker(connection);
         Item item = new Item("item");
         tracker.add(item);
-        assertThat(tracker.findById(item.getId()), is(item));
+        assertEquals(tracker.findById(item.getId()), item);
     }
 
     @Test
@@ -94,7 +92,7 @@ public class SqlTrackerTest {
         tracker.add(item);
         int id = item.getId();
         tracker.replace(item.getId(), newItem);
-        assertThat(tracker.findById(id).getName(), is(newItem.getName()));
+        assertEquals(tracker.findById(id).getName(), newItem.getName());
     }
 
     @Test

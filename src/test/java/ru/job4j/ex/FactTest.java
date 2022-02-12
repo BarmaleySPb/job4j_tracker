@@ -2,6 +2,7 @@ package ru.job4j.ex;
 
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class FactTest {
@@ -14,6 +15,6 @@ public class FactTest {
     @Test
     public void whenTwo() {
         int rsl = Fact.calc(2);
-        assertThat(rsl, is(2));
+        assertEquals(rsl, 2);
     }
 }

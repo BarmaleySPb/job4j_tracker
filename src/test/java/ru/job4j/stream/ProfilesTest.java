@@ -22,7 +22,7 @@ public class ProfilesTest {
         expected.add(new Address("Moscow", "Lenina", 12, 23));
         expected.add(new Address("Moscow", "Vtoraya sov", 62, 255));
         expected.add(new Address("St. Peterbyrg", "Novikova", 122, 423));
-        assertThat(result, is(expected));
+        assertEquals(result, expected);
     }
 
     @Test
@@ -39,6 +39,6 @@ public class ProfilesTest {
         expected.add(new Address("Moscow", "Lenina", 12, 23));
         expected.add(new Address("Moscow", "Vtoraya sov", 62, 255));
         expected.add(new Address("St. Peterbyrg", "Novikova", 122, 423));
-        assertThat(result, is(expected));
+        assertEquals(result, expected);
     }
 }

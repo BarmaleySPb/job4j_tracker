@@ -26,7 +26,7 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertThat(college.findByAccount("000010"), is(Optional.empty()));
+        assertEquals(college.findByAccount("000010"), Optional.empty());
     }
 
     @Test
@@ -44,7 +44,7 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertThat(college.findByAccount("000001").get().getGroup(), is("201-18-15"));
+        assertEquals(college.findByAccount("000001").get().getGroup(), "201-18-15");
     }
 
     @Test
@@ -62,7 +62,7 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertThat(college.findBySubjectName("000010", "Sociology"), is(Optional.empty()));
+        assertEquals(college.findBySubjectName("000010", "Sociology"), Optional.empty());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertThat(college.findBySubjectName("000001", "Sociology"), is(Optional.empty()));
+        assertEquals(college.findBySubjectName("000001", "Sociology"), Optional.empty());
     }
 
     @Test
@@ -98,6 +98,6 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertThat(college.findBySubjectName("000002", "Sociology").get().getScore(), is(65));
+        assertEquals(college.findBySubjectName("000002", "Sociology").get().getScore(), 65);
     }
 }

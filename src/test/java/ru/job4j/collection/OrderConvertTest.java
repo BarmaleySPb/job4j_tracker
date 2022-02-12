@@ -16,7 +16,7 @@ public class OrderConvertTest {
         List<Order> orders = new ArrayList<>();
         orders.add(new Order("3sfe", "Dress"));
         HashMap<String, Order> map = OrderConvert.process(orders);
-        assertThat(map.get("3sfe"), is(new Order("3sfe", "Dress")));
+        assertEquals(map.get("3sfe"), new Order("3sfe", "Dress"));
     }
 
     @Test
@@ -27,6 +27,6 @@ public class OrderConvertTest {
         orders.add(new Order("3sfe", "Dress"));
         orders.add(new Order("4sfe", "Shirt"));
         HashMap<String, Order> map = OrderConvert.process(orders);
-        assertThat(map.size(), is(2));
+        assertEquals(map.size(), 2);
     }
 }

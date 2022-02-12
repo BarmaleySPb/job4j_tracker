@@ -6,9 +6,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class TrackerTest {
 
@@ -19,7 +18,7 @@ public class TrackerTest {
         item.setName("test1");
         tracker.add(item);
         Item result = tracker.findById(item.getId());
-        assertThat(result.getName(), is(item.getName()));
+        assertEquals(result.getName(), item.getName());
     }
 
     @Test
@@ -32,7 +31,7 @@ public class TrackerTest {
         Item bugWithDesc = new Item();
         bugWithDesc.setName("Bug with description");
         tracker.replace(id, bugWithDesc);
-        assertThat(tracker.findById(id).getName(), is("Bug with description"));
+        assertEquals(tracker.findById(id).getName(), "Bug with description");
     }
 
     @Test
@@ -43,7 +42,7 @@ public class TrackerTest {
         tracker.add(bug);
         int id = bug.getId();
         tracker.delete(id);
-        assertThat(tracker.findById(id), is(nullValue()));
+        assertNull(tracker.findById(id));
     }
 
     @Test
@@ -60,7 +59,7 @@ public class TrackerTest {
         tracker.add(asd);
         int id = bug.getId();
         tracker.delete(id);
-        assertThat(tracker.findById(id), is(nullValue()));
+        assertNull(tracker.findById(id));
     }
 
     @Test
@@ -73,9 +72,9 @@ public class TrackerTest {
         tracker.add(second);
         tracker.add(third);
         List<Item> items = new ArrayList<>(tracker.findAll());
-        Assert.assertThat(ItemSorter.sort(items).toString(), is("[" + first + ", "
-                + second + ", " + third + "]"));
-        Assert.assertThat(ItemSorter.sortRevers(items).toString(), is("[" + third + ", "
-                + second + ", " + first + "]"));
+        Assert.assertEquals(ItemSorter.sort(items).toString(), "[" + first + ", "
+                + second + ", " + third + "]");
+        Assert.assertEquals(ItemSorter.sortRevers(items).toString(), "[" + third + ", "
+                + second + ", " + first + "]");
     }
 }

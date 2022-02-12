@@ -30,6 +30,6 @@ public class StudentsTest {
         expected.put("Surname5", students.get(3));
         expected.put("Surname6", students.get(5));
         expected.put("Surname8", students.get(6));
-        assertThat(result, is(expected));
+        assertEquals(result, expected);
     }
 }

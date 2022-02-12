@@ -5,8 +5,10 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class StartUITest {
 
@@ -20,10 +22,10 @@ public class StartUITest {
         ArrayList<UserAction> actions = new ArrayList<>();
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
-        assertThat(out.toString(), is(
+        assertEquals(out.toString(),
                 "Menu." + System.lineSeparator()
                         + "0. Exit program" + System.lineSeparator()
-        ));
+        );
     }
 
     @Test
@@ -39,7 +41,7 @@ public class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         List<Item> findItem = tracker.findAll();
         Item newItem = findItem.get(0);
-        assertThat(out.toString(), is(
+        assertEquals(out.toString(),
                 "Menu." + System.lineSeparator()
                         + "0. Add new Item" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
@@ -48,7 +50,7 @@ public class StartUITest {
                         + "Menu." + System.lineSeparator()
                         + "0. Add new Item" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
-        ));
+        );
     }
 
     @Test
@@ -65,7 +67,7 @@ public class StartUITest {
                 actions.add(new ReplaceAction(out));
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
-        assertThat(out.toString(), is(
+        assertEquals(out.toString(),
                 "Menu." + System.lineSeparator()
                         + "0. Replace item" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
@@ -74,7 +76,7 @@ public class StartUITest {
                         + "Menu." + System.lineSeparator()
                         + "0. Replace item" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
-        ));
+        );
     }
 
     @Test
@@ -94,7 +96,7 @@ public class StartUITest {
                 actions.add(new ShowAllAction(out));
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
-        assertThat(out.toString(), is(
+        assertEquals(out.toString(),
                 "Menu." + System.lineSeparator()
                         + "0. Show all items" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
@@ -105,7 +107,7 @@ public class StartUITest {
                         + "Menu." + System.lineSeparator()
                         + "0. Show all items" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
-        ));
+        );
     }
 
     @Test
@@ -121,7 +123,7 @@ public class StartUITest {
                 actions.add(new FindByIdAction(out));
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
-        assertThat(out.toString(), is(
+        assertEquals(out.toString(),
                 "Menu." + System.lineSeparator()
                         + "0. Find item by ID" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
@@ -130,7 +132,7 @@ public class StartUITest {
                         + "Menu." + System.lineSeparator()
                         + "0. Find item by ID" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
-        ));
+        );
     }
 
     @Test
@@ -148,7 +150,7 @@ public class StartUITest {
                 actions.add(new FindByNameAction(out));
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
-        assertThat(out.toString(), is(
+        assertEquals(out.toString(),
                 "Menu." + System.lineSeparator()
                         + "0. Find items by name" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
@@ -157,7 +159,7 @@ public class StartUITest {
                         + "Menu." + System.lineSeparator()
                         + "0. Find items by name" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
-        ));
+        );
     }
 
     @Test
@@ -171,13 +173,151 @@ public class StartUITest {
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        assertThat(out.toString(), is(
+        assertEquals(out.toString(),
                 "Menu." + ln
                         + "0. Exit program" + ln
                         + "Wrong input, you can select: 0 .. 0" + ln
                         + "Menu." + ln
                         + "0. Exit program" + ln
-                )
         );
+    }
+
+    @Test
+    public void executeReplaceAction() {
+        Output out = new StubOutput();
+        MemTracker tracker = new MemTracker();
+        tracker.add(new Item("Replaced item"));
+        String replacedName = "New item name";
+        ReplaceAction rep = new ReplaceAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(1);
+        when(input.askStr(any(String.class))).thenReturn(replacedName);
+
+        rep.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        assertEquals(out.toString(), "==== Edit new item ====" + ln
+                + "Заявка успешно изменена." + ln);
+        assertEquals(tracker.findAll().get(0).getName(), replacedName);
+    }
+
+    @Test
+    public void executeReplaceAction2() {
+        Output out = new StubOutput();
+        MemTracker tracker = new MemTracker();
+        tracker.add(new Item("Replaced item"));
+        ReplaceAction rep = new ReplaceAction(out);
+
+        Input input = mock(Input.class);
+
+        rep.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        assertEquals(out.toString(), "==== Edit new item ====" + ln
+                + "Заявка с ID: 0 не найдена" + ln);
+        assertEquals(tracker.findAll().get(0).getName(), "Replaced item");
+    }
+
+    @Test
+    public void executeDeleteAction() {
+        Output out = new StubOutput();
+        MemTracker tracker = new MemTracker();
+        tracker.add(new Item("New item"));
+        DeleteAction del = new DeleteAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(1);
+
+        del.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        assertEquals(out.toString(), "==== Delete item ====" + ln
+                + "Заявка успешно удалена." + ln);
+    }
+
+    @Test
+    public void executeDeleteAction2() {
+        Output out = new StubOutput();
+        MemTracker tracker = new MemTracker();
+        tracker.add(new Item("New item"));
+        DeleteAction del = new DeleteAction(out);
+
+        Input input = mock(Input.class);
+
+        del.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        assertEquals(out.toString(), "==== Delete item ====" + ln
+                + "Заявка с ID: 0 не найдена." + ln);
+    }
+
+    @Test
+    public void executeFindByIdAction() {
+        Output out = new StubOutput();
+        MemTracker tracker = new MemTracker();
+        Item firstItem = new Item("First item");
+        Item secondItem = new Item("Second item");
+        Item thirdItem = new Item("Third item");
+        tracker.add(firstItem);
+        tracker.add(secondItem);
+        tracker.add(thirdItem);
+        FindByIdAction find = new FindByIdAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(2);
+
+        find.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        assertEquals(out.toString(), "==== Find item by ID ===="
+                + ln + secondItem + ln);
+    }
+
+    @Test
+    public void executeFindByIdAction2() {
+        Output out = new StubOutput();
+        MemTracker tracker = new MemTracker();
+        Item firstItem = new Item("First item");
+        Item secondItem = new Item("Second item");
+        Item thirdItem = new Item("Third item");
+        tracker.add(firstItem);
+        tracker.add(secondItem);
+        tracker.add(thirdItem);
+        FindByIdAction find = new FindByIdAction(out);
+
+        Input input = mock(Input.class);
+
+        find.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        assertEquals(out.toString(), "==== Find item by ID ====" + ln
+                + "Заявка с ID: 0 не найдена" + ln);
+    }
+
+    @Test
+    public void executeFindByNameAction() {
+        Output out = new StubOutput();
+        MemTracker tracker = new MemTracker();
+        Item firstItem = new Item("First item");
+        Item secondItem = new Item("Second item");
+        Item thirdItem = new Item("Third item");
+        tracker.add(firstItem);
+        tracker.add(secondItem);
+        tracker.add(thirdItem);
+        FindByNameAction find = new FindByNameAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askStr(any(String.class))).thenReturn("Third item");
+
+        find.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        assertEquals(out.toString(), "==== Find items by name ====" + ln
+                + thirdItem + ln);
     }
 }
