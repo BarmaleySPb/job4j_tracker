@@ -1,7 +1,8 @@
 package ru.job4j.tracker;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -9,14 +10,12 @@ import java.util.Objects;
 @Table(name = "items")
 public class Item implements Comparable<Item> {
 
-    private static final DateTimeFormatter FORMATTER =
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private LocalDateTime created = LocalDateTime.now();
+    private Timestamp created = Timestamp.from(Instant.now());
+    private String description;
 
     public Item() {
     }
@@ -28,15 +27,22 @@ public class Item implements Comparable<Item> {
     public Item(String name, int id) {
         this.name = name;
         this.id = id;
+        this.created = Timestamp.from(Instant.now());
+        this.description = "";
     }
 
-    public Item(String name, int id, LocalDateTime created) {
+    public Item(String name, int id, Timestamp created, String description) {
         this.name = name;
         this.id = id;
         this.created = created;
+        this.description = description;
     }
 
-    public LocalDateTime getCreated() {
+    public String getDescription() {
+        return description;
+    }
+
+    public Timestamp getCreated() {
         return created;
     }
 
@@ -56,13 +62,18 @@ public class Item implements Comparable<Item> {
         this.name = name;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Item{"
-                + "created=" + FORMATTER.format(created)
-                + ", id=" + id
-                + ", name='" + name + '\''
-                + '}';
+                 + "id=" + id
+                 + ", name='" + name + '\''
+                 + ", created=" + created
+                 + ", description='" + description + '\''
+                 + '}';
     }
 
     @Override
