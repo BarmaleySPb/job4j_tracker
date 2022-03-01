@@ -22,6 +22,8 @@ public class Item implements Comparable<Item> {
 
     public Item(String name) {
         this.name = name;
+        this.created = Timestamp.from(Instant.now());
+        this.description = "";
     }
 
     public Item(String name, int id) {
