@@ -15,8 +15,8 @@ public class HbmTrackerTest {
         Store store = new HbmTracker();
         store.add(new Item("item"));
         List<Item> items = store.findAll();
-        assertEquals(items.size(), 1);
-        assertEquals(items.get(0).getName(), "item");
+        assertEquals(1, items.size());
+        assertEquals("item", items.get(0).getName());
     }
 
     @Test
@@ -25,7 +25,7 @@ public class HbmTrackerTest {
         int idForReplace = store.add(new Item("item")).getId();
         Item replaceItem = new Item("replace Item");
         store.replace(idForReplace, replaceItem);
-        assertEquals(store.findById(idForReplace).getName(), "replace Item");
+        assertEquals("replace Item", store.findById(idForReplace).getName());
     }
 
     @Test

@@ -104,7 +104,7 @@ public class SqlTracker implements Store {
     @Override
     public Item findById(int id) {
         List<Item> items = find(String.format("select * from items where id = %s", id));
-        return items.size() != 0 ? items.get(0) : null;
+        return !items.isEmpty() ? items.get(0) : null;
     }
 
     private List<Item> find(String string) {

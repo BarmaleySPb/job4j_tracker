@@ -29,7 +29,7 @@
         <profile>
             <id>production</id>
             <properties>
-                <db.url>jdbc:postgresql://127.0.0.1:5433/tracker</db.url>
+                <db.url>jdbc:postgresql://127.0.0.1:5432/tracker</db.url>
                 <db.username>postgres</db.username>
                 <db.password>password</db.password>
                 <db.driver>org.postgresql.Driver</db.driver>
@@ -53,7 +53,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.3.2</version>
+            <version>42.3.3</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -70,7 +70,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.6.5.Final</version>
+            <version>5.6.7.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>
