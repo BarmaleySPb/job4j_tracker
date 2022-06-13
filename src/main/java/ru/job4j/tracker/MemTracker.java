@@ -41,6 +41,11 @@ public class MemTracker implements Store {
         return List.copyOf(items);
     }
 
+    @Override
+    public void findAllByReact(Observe<Item> observe) {
+        items.forEach(observe::receive);
+    }
+
     public boolean replace(int id, Item item) {
         int index = items.indexOf(findById(id));
         if (index != -1) {

@@ -72,6 +72,16 @@ public class HbmTracker implements Store {
         return items;
     }
 
+    public void findAllByReact(Observe<Item> observe) {
+        List<Item> items;
+        try (Session session = sf.openSession()) {
+            session.beginTransaction();
+            items = session.createQuery("from Item").list();
+            items.forEach(observe::receive);
+            session.getTransaction().commit();
+        }
+    }
+
     @Override
     public List<Item> findByName(String key) {
         List items;
