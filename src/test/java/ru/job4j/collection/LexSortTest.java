@@ -1,10 +1,10 @@
 package ru.job4j.collection;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
 import java.util.Arrays;
+
+import static org.junit.Assert.assertArrayEquals;
 
 public class LexSortTest {
 

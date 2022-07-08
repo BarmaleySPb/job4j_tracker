@@ -5,8 +5,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ProfilesTest {
 
@@ -22,7 +21,7 @@ public class ProfilesTest {
         expected.add(new Address("Moscow", "Lenina", 12, 23));
         expected.add(new Address("Moscow", "Vtoraya sov", 62, 255));
         expected.add(new Address("St. Peterbyrg", "Novikova", 122, 423));
-        assertEquals(result, expected);
+        assertEquals(expected, result);
     }
 
     @Test
@@ -39,6 +38,6 @@ public class ProfilesTest {
         expected.add(new Address("Moscow", "Lenina", 12, 23));
         expected.add(new Address("Moscow", "Vtoraya sov", 62, 255));
         expected.add(new Address("St. Peterbyrg", "Novikova", 122, 423));
-        assertEquals(result, expected);
+        assertEquals(expected, result);
     }
 }

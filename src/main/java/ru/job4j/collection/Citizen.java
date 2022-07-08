@@ -3,8 +3,8 @@ package ru.job4j.collection;
 import java.util.Objects;
 
 public class Citizen {
-    private String passport;
-    private String username;
+    private final String passport;
+    private final String username;
 
     public Citizen(String passport, String username) {
         this.passport = passport;

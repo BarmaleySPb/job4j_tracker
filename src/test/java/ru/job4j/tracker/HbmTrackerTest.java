@@ -48,7 +48,7 @@ public class HbmTrackerTest {
         Store store = new HbmTracker();
         Item firstItem = store.add(new Item("first item"));
         Item secondItem = store.add(new Item("second item"));
-        assertEquals(store.findAll(), List.of(firstItem, secondItem));
+        assertEquals(List.of(firstItem, secondItem), store.findAll());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class HbmTrackerTest {
         Item thirdItem = store.add(
                 new Item("second item", Timestamp.from(Instant.now()), "description")
         );
-        assertEquals(store.findByName("second item"), List.of(secondItem, thirdItem));
+        assertEquals(List.of(secondItem, thirdItem), store.findByName("second item"));
     }
 
     @Test
@@ -70,6 +70,6 @@ public class HbmTrackerTest {
         Item thirdItem = store.add(
                 new Item("second item", Timestamp.from(Instant.now()), "description")
         );
-        assertEquals(store.findById(2), secondItem);
+        assertEquals(secondItem, store.findById(2));
     }
 }

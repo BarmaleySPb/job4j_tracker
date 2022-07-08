@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Subject {
 
-    private String name;
+    private final String name;
 
-    private int score;
+    private final int score;
 
     public Subject(String name, int score) {
         this.name = name;

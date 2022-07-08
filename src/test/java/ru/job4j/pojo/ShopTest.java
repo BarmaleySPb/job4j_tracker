@@ -13,7 +13,7 @@ public class ShopTest {
         products[1] = new Product("Bread", 4);
         products[2] = new Product("Egg", 19);
         int rsl = Shop.indexOfNull(products);
-        assertEquals(rsl, 3);
+        assertEquals(3, rsl);
     }
 
     @Test
@@ -21,7 +21,7 @@ public class ShopTest {
         Product[] products = new Product[5];
         products[1] = new Product("Milk", 10);
         int rsl = Shop.indexOfNull(products);
-        assertEquals(rsl, 0);
+        assertEquals(0, rsl);
     }
 
     @Test
@@ -29,6 +29,6 @@ public class ShopTest {
         Product[] products = new Product[1];
         products[0] = new Product("Milk", 10);
         int rsl = Shop.indexOfNull(products);
-        assertEquals(rsl,  -1);
+        assertEquals(-1, rsl);
     }
 }

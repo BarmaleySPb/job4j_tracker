@@ -13,7 +13,7 @@ public class BankServiceTest {
         User user = new User("3434", "Petr Arsentev");
         BankService bank = new BankService();
         bank.addUser(user);
-        assertEquals(bank.findByPassport("3434").get(), user);
+        assertEquals(bank.findByPassport("3434").orElseThrow(), user);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class BankServiceTest {
         BankService bank = new BankService();
         bank.addUser(user);
         bank.addAccount(user.getPassport(), new Account("5546", 150D));
-        assertEquals((Double) bank.findByRequisite("3434", "5546").get().getBalance(),
+        assertEquals((Double) bank.findByRequisite("3434", "5546").orElseThrow().getBalance(),
                 (Double) 150D);
     }
 
@@ -48,10 +48,10 @@ public class BankServiceTest {
                 500D));
         assertFalse(bank.transferMoney(user.getPassport(), "12345", user.getPassport(), "5546",
                 500D));
-        assertEquals((Double) bank.findByRequisite(user.getPassport(), "113").get().getBalance(),
-                (Double) 200D);
-        assertEquals((Double) bank.findByRequisite(user.getPassport(), "5546").get().getBalance(),
-                (Double) 0D);
+        assertEquals(200D,
+                bank.findByRequisite(user.getPassport(), "113").orElseThrow().getBalance(), 0);
+        assertEquals(0D,
+                bank.findByRequisite(user.getPassport(), "5546").orElseThrow().getBalance(), 0);
 
     }
 
@@ -64,8 +64,8 @@ public class BankServiceTest {
         bank.addUser(user);
         bank.addAccount(user.getPassport(), accountFirst);
         bank.addAccount(user.getPassport(), accountSecond);
-        assertEquals(bank.findByRequisite("3434", "5546").get(), accountFirst);
-        assertEquals(bank.findByRequisite("3434", "5547").get(), accountSecond);
-        assertEquals(bank.findByRequisite("3434", "1111"), Optional.empty());
+        assertEquals(accountFirst, bank.findByRequisite("3434", "5546").orElseThrow());
+        assertEquals(accountSecond, bank.findByRequisite("3434", "5547").orElseThrow());
+        assertEquals(Optional.empty(), bank.findByRequisite("3434", "1111"));
     }
 }

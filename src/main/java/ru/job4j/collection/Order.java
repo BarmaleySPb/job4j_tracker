@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Order {
 
-    private String number;
-    private String name;
+    private final String number;
+    private final String name;
 
     public Order(String number, String name) {
         this.number = number;

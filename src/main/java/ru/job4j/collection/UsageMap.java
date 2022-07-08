@@ -1,6 +1,7 @@
 package ru.job4j.collection;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class UsageMap {
 
@@ -9,9 +10,8 @@ public class UsageMap {
         map.put("e.g.zakharov@gmail.com", "Zakharov Evgeny");
         map.put("vasyavasin@gmail.com", "Vasya Vasin");
         map.put("petyapetin@mail.ru", "Petya Petin");
-        for (String key : map.keySet()) {
-            String value = map.get(key);
-            System.out.println(key + " = " + value);
+        for (Map.Entry<String, String> el : map.entrySet()) {
+            System.out.println(el.getKey() + " = " + el.getValue());
         }
     }
 }

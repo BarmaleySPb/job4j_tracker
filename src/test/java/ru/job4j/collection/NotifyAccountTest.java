@@ -5,8 +5,7 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class NotifyAccountTest {
 
@@ -22,7 +21,7 @@ public class NotifyAccountTest {
                         new Account("142", "Petr Arsentev", "000001")
                 )
         );
-        assertEquals(NotifyAccount.sent(accounts), expect);
+        assertEquals(expect, NotifyAccount.sent(accounts));
     }
 
     @Test
@@ -40,6 +39,6 @@ public class NotifyAccountTest {
                         new Account("333", "Vasiliy Vasin", "4564bnmb")
                 )
         );
-        assertEquals(NotifyAccount.sent(accounts), expect);
+        assertEquals(expect, NotifyAccount.sent(accounts));
     }
 }

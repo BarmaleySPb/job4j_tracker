@@ -22,9 +22,9 @@ public class StartUITest {
         ArrayList<UserAction> actions = new ArrayList<>();
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
-        assertEquals(out.toString(),
-                "Menu." + System.lineSeparator()
-                        + "0. Exit program" + System.lineSeparator()
+        assertEquals(
+                "Menu." + System.lineSeparator() + "0. Exit program" + System.lineSeparator(),
+                out.toString()
         );
     }
 
@@ -41,7 +41,7 @@ public class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         List<Item> findItem = tracker.findAll();
         Item newItem = findItem.get(0);
-        assertEquals(out.toString(),
+        assertEquals(
                 "Menu." + System.lineSeparator()
                         + "0. Add new Item" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
@@ -49,7 +49,8 @@ public class StartUITest {
                         + "Добавлена новая заявка: " + newItem + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. Add new Item" + System.lineSeparator()
-                        + "1. Exit program" + System.lineSeparator()
+                        + "1. Exit program" + System.lineSeparator(),
+                out.toString()
         );
     }
 
@@ -67,7 +68,7 @@ public class StartUITest {
                 actions.add(new ReplaceAction(out));
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
-        assertEquals(out.toString(),
+        assertEquals(
                 "Menu." + System.lineSeparator()
                         + "0. Replace item" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
@@ -75,7 +76,8 @@ public class StartUITest {
                         + "Заявка успешно изменена." + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. Replace item" + System.lineSeparator()
-                        + "1. Exit program" + System.lineSeparator()
+                        + "1. Exit program" + System.lineSeparator(),
+                out.toString()
         );
     }
 
@@ -96,7 +98,7 @@ public class StartUITest {
                 actions.add(new ShowAllAction(out));
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
-        assertEquals(out.toString(),
+        assertEquals(
                 "Menu." + System.lineSeparator()
                         + "0. Show all items" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
@@ -106,7 +108,8 @@ public class StartUITest {
                         + third + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. Show all items" + System.lineSeparator()
-                        + "1. Exit program" + System.lineSeparator()
+                        + "1. Exit program" + System.lineSeparator(),
+                out.toString()
         );
     }
 
@@ -123,7 +126,7 @@ public class StartUITest {
                 actions.add(new FindByIdAction(out));
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
-        assertEquals(out.toString(),
+        assertEquals(
                 "Menu." + System.lineSeparator()
                         + "0. Find item by ID" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
@@ -131,7 +134,8 @@ public class StartUITest {
                         + newItem + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. Find item by ID" + System.lineSeparator()
-                        + "1. Exit program" + System.lineSeparator()
+                        + "1. Exit program" + System.lineSeparator(),
+                out.toString()
         );
     }
 
@@ -150,7 +154,7 @@ public class StartUITest {
                 actions.add(new FindByNameAction(out));
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
-        assertEquals(out.toString(),
+        assertEquals(
                 "Menu." + System.lineSeparator()
                         + "0. Find items by name" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
@@ -158,7 +162,8 @@ public class StartUITest {
                         + second + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. Find items by name" + System.lineSeparator()
-                        + "1. Exit program" + System.lineSeparator()
+                        + "1. Exit program" + System.lineSeparator(),
+                out.toString()
         );
     }
 
@@ -173,12 +178,13 @@ public class StartUITest {
                 actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        assertEquals(out.toString(),
+        assertEquals(
                 "Menu." + ln
                         + "0. Exit program" + ln
                         + "Wrong input, you can select: 0 .. 0" + ln
                         + "Menu." + ln
-                        + "0. Exit program" + ln
+                        + "0. Exit program" + ln,
+                out.toString()
         );
     }
 
@@ -200,7 +206,7 @@ public class StartUITest {
         String ln = System.lineSeparator();
         assertEquals(out.toString(), "==== Edit new item ====" + ln
                 + "Заявка успешно изменена." + ln);
-        assertEquals(tracker.findAll().get(0).getName(), replacedName);
+        assertEquals(replacedName, tracker.findAll().get(0).getName());
     }
 
     @Test
@@ -217,7 +223,7 @@ public class StartUITest {
         String ln = System.lineSeparator();
         assertEquals(out.toString(), "==== Edit new item ====" + ln
                 + "Заявка с ID: 0 не найдена" + ln);
-        assertEquals(tracker.findAll().get(0).getName(), "Replaced item");
+        assertEquals("Replaced item", tracker.findAll().get(0).getName());
     }
 
     @Test
@@ -234,8 +240,10 @@ public class StartUITest {
         del.execute(input, tracker);
 
         String ln = System.lineSeparator();
-        assertEquals(out.toString(), "==== Delete item ====" + ln
-                + "Заявка успешно удалена." + ln);
+        assertEquals(
+                "==== Delete item ====" + ln
+                + "Заявка успешно удалена." + ln,
+                out.toString());
     }
 
     @Test
@@ -250,8 +258,11 @@ public class StartUITest {
         del.execute(input, tracker);
 
         String ln = System.lineSeparator();
-        assertEquals(out.toString(), "==== Delete item ====" + ln
-                + "Заявка с ID: 0 не найдена." + ln);
+        assertEquals(
+                "==== Delete item ====" + ln
+                + "Заявка с ID: 0 не найдена." + ln,
+                out.toString()
+        );
     }
 
     @Test
@@ -273,8 +284,11 @@ public class StartUITest {
         find.execute(input, tracker);
 
         String ln = System.lineSeparator();
-        assertEquals(out.toString(), "==== Find item by ID ===="
-                + ln + secondItem + ln);
+        assertEquals(
+                "==== Find item by ID ===="
+                + ln + secondItem + ln,
+                out.toString()
+        );
     }
 
     @Test
@@ -294,8 +308,11 @@ public class StartUITest {
         find.execute(input, tracker);
 
         String ln = System.lineSeparator();
-        assertEquals(out.toString(), "==== Find item by ID ====" + ln
-                + "Заявка с ID: 0 не найдена" + ln);
+        assertEquals(
+                "==== Find item by ID ====" + ln
+                + "Заявка с ID: 0 не найдена" + ln,
+                out.toString()
+        );
     }
 
     @Test
@@ -317,7 +334,10 @@ public class StartUITest {
         find.execute(input, tracker);
 
         String ln = System.lineSeparator();
-        assertEquals(out.toString(), "==== Find items by name ====" + ln
-                + thirdItem + ln);
+        assertEquals(
+                "==== Find items by name ====" + ln
+                + thirdItem + ln,
+                out.toString()
+        );
     }
 }

@@ -31,7 +31,7 @@ public class TrackerTest {
         Item bugWithDesc = new Item();
         bugWithDesc.setName("Bug with description");
         tracker.replace(id, bugWithDesc);
-        assertEquals(tracker.findById(id).getName(), "Bug with description");
+        assertEquals("Bug with description", tracker.findById(id).getName());
     }
 
     @Test
@@ -72,9 +72,13 @@ public class TrackerTest {
         tracker.add(second);
         tracker.add(third);
         List<Item> items = new ArrayList<>(tracker.findAll());
-        Assert.assertEquals(ItemSorter.sort(items).toString(), "[" + first + ", "
-                + second + ", " + third + "]");
-        Assert.assertEquals(ItemSorter.sortRevers(items).toString(), "[" + third + ", "
-                + second + ", " + first + "]");
+        Assert.assertEquals(
+                "[" + first + ", " + second + ", " + third + "]",
+                ItemSorter.sort(items).toString()
+        );
+        Assert.assertEquals(
+                "[" + third + ", " + second + ", " + first + "]",
+                ItemSorter.sortRevers(items).toString()
+        );
     }
 }

@@ -6,8 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class FullSearchTest {
 
@@ -19,6 +18,6 @@ public class FullSearchTest {
                 new Task("1", "First desc")
         );
         Set<String> expected = new HashSet<>(List.of("1", "2"));
-        assertEquals(FullSearch.extractNumber(tasks), expected);
+        assertEquals(expected, FullSearch.extractNumber(tasks));
     }
 }

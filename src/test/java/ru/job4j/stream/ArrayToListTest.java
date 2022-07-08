@@ -4,8 +4,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ArrayToListTest {
 
@@ -18,7 +17,7 @@ public class ArrayToListTest {
                 {11}
         };
         List<Integer> expected = List.of(1, 2, 2, 4, 5, 7, 8, 9, 11);
-        assertEquals(ArrayToList.twoDimArray(array), expected);
+        assertEquals(expected, ArrayToList.twoDimArray(array));
     }
 
     @Test
@@ -30,6 +29,6 @@ public class ArrayToListTest {
                 {10, 11, 12}
         };
         List<Integer> expected = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-        assertEquals(ArrayToList.twoDimArray(array), expected);
+        assertEquals(expected, ArrayToList.twoDimArray(array));
     }
 }

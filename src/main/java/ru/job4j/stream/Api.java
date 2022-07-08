@@ -3,7 +3,6 @@ package ru.job4j.stream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Api {
 
@@ -11,8 +10,7 @@ public class Api {
         List<Integer> numbers = Arrays.asList(1, 3, 4, -5, 7, -10, 34, 54, -45);
         ArrayList<Integer> list = new ArrayList<>(numbers);
         List<Integer> negNum = list.stream()
-                .filter(stream -> stream > 0)
-                .collect(Collectors.toList());
+                .filter(stream -> stream > 0).toList();
         System.out.println(negNum);
     }
 }

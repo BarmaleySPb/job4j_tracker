@@ -7,21 +7,21 @@ public class Departments {
     public static List<String> fillGaps(List<String> deps) {
         Set<String> temp = new LinkedHashSet<>();
         for (String item : deps) {
-            String ell = "";
+            StringBuilder ell = new StringBuilder();
             for (String el : item.split("/")) {
-                ell += el;
-                temp.add(ell);
-                ell += "/";
+                ell.append(el);
+                temp.add(ell.toString());
+                ell.append("/");
             }
         }
         return new ArrayList<>(temp);
     }
 
-    public static void sortAsc(List<String> orgs) {
-        Collections.sort(orgs);
+    public static void sortAsc(List<String> args) {
+        Collections.sort(args);
     }
 
-    public static void sortDesc(List<String> orgs) {
-        orgs.sort(new DepDescComp());
+    public static void sortDesc(List<String> args) {
+        args.sort(new DepDescComp());
     }
 }

@@ -6,8 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CollegeTest {
 
@@ -26,7 +25,7 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertEquals(college.findByAccount("000010"), Optional.empty());
+        assertEquals(Optional.empty(), college.findByAccount("000010"));
     }
 
     @Test
@@ -44,7 +43,7 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertEquals(college.findByAccount("000001").get().getGroup(), "201-18-15");
+        assertEquals("201-18-15", college.findByAccount("000001").orElseThrow().getGroup());
     }
 
     @Test
@@ -62,7 +61,7 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertEquals(college.findBySubjectName("000010", "Sociology"), Optional.empty());
+        assertEquals(Optional.empty(), college.findBySubjectName("000010", "Sociology"));
     }
 
     @Test
@@ -80,7 +79,7 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertEquals(college.findBySubjectName("000001", "Sociology"), Optional.empty());
+        assertEquals(Optional.empty(), college.findBySubjectName("000001", "Sociology"));
     }
 
     @Test
@@ -98,6 +97,6 @@ public class CollegeTest {
                 )
         );
         College college = new College(students);
-        assertEquals(college.findBySubjectName("000002", "Sociology").get().getScore(), 65);
+        assertEquals(65, college.findBySubjectName("000002", "Sociology").orElseThrow().getScore());
     }
 }

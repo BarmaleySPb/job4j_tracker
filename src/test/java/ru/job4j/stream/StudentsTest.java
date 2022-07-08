@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class StudentsTest {
 
@@ -30,6 +29,6 @@ public class StudentsTest {
         expected.put("Surname5", students.get(3));
         expected.put("Surname6", students.get(5));
         expected.put("Surname8", students.get(6));
-        assertEquals(result, expected);
+        assertEquals(expected, result);
     }
 }

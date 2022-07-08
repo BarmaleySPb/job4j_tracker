@@ -1,10 +1,10 @@
 package ru.job4j.collection;
 
 import org.junit.Test;
+
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 public class ConvertList2ArrayTest {
 

@@ -1,8 +1,6 @@
 package ru.job4j.collection;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class JobSorter {
@@ -15,9 +13,9 @@ public class JobSorter {
                 new Job("Back", 2),
                 new Job("X task", 0)
         );
-        Collections.sort(jobs, new JobDescByName().thenComparing(new JobDescByPriority()));
+        jobs.sort(new JobDescByName().thenComparing(new JobDescByPriority()));
         System.out.println(jobs);
-        Collections.sort(jobs, new JobDescByPriority());
+        jobs.sort(new JobDescByPriority());
         System.out.println((jobs));
     }
 }

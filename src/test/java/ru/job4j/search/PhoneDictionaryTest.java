@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PhoneDictionaryTest {
 
@@ -16,7 +16,7 @@ public class PhoneDictionaryTest {
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
         ArrayList<Person> persons = phones.find("Petr");
-        assertEquals(persons.get(0).getSurname(), "Arsentev");
+        assertEquals("Arsentev", persons.get(0).getSurname());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class PhoneDictionaryTest {
                 new Person("Ivan", "Ivanow", "734872", "Murmansk")
         );
         var persons = phones.find("Vasin");
-        assertEquals(persons.get(0).getName(), "Vasiliy");
+        assertEquals("Vasiliy", persons.get(0).getName());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class PhoneDictionaryTest {
                 new Person("Ivan", "Ivanov", "734872", "Murmansk")
         );
         var persons = phones.find("734872");
-        assertEquals(persons.get(0).getSurname(), "Ivanov");
+        assertEquals("Ivanov", persons.get(0).getSurname());
     }
 
     @Test
@@ -74,6 +74,6 @@ public class PhoneDictionaryTest {
                 new Person("Ivan", "Ivanow", "734872", "Murmansk")
         );
         var persons = phones.find("Moscow");
-        assertEquals(persons.get(0).getSurname(), "Vasin");
+        assertEquals("Vasin", persons.get(0).getSurname());
     }
 }

@@ -14,7 +14,7 @@ public class ValidateInputTest {
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Select: ");
-        assertEquals(selected, 1);
+        assertEquals(1, selected);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class ValidateInputTest {
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Select: ");
-        assertEquals(selected, 1);
+        assertEquals(1, selected);
     }
 
     @Test
@@ -38,9 +38,9 @@ public class ValidateInputTest {
         int first = input.askInt("Select: ");
         int second = input.askInt("Select: ");
         int third = input.askInt("Select: ");
-        assertEquals(first, 1);
-        assertEquals(second, 2);
-        assertEquals(third, 3);
+        assertEquals(1, first);
+        assertEquals(2, second);
+        assertEquals(3, third);
     }
 
     @Test
@@ -51,6 +51,6 @@ public class ValidateInputTest {
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Select: ");
-        assertEquals(selected, -2);
+        assertEquals(-2, selected);
     }
 }

@@ -11,7 +11,7 @@ public class PassportOfficeTest {
         Citizen citizen = new Citizen("2f44a", "Petr Arsentev");
         PassportOffice office = new PassportOffice();
         office.add(citizen);
-        assertEquals(office.get(citizen.getPassport()), citizen);
+        assertEquals(citizen, office.get(citizen.getPassport()));
     }
 
     @Test
@@ -21,6 +21,6 @@ public class PassportOfficeTest {
         PassportOffice office = new PassportOffice();
         office.add(citizen);
         assertFalse(office.add(citizenWithSamePassport));
-        assertEquals(office.get(citizen.getPassport()), citizen);
+        assertEquals(citizen, office.get(citizen.getPassport()));
     }
 }

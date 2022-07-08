@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SchoolTest {
 
@@ -26,7 +25,7 @@ public class SchoolTest {
         List<Student> expected = new ArrayList<>();
         expected.add(new Student(70, "Surname7"));
         expected.add(new Student(90, "Surname9"));
-        assertEquals(rsl, expected);
+        assertEquals(expected, rsl);
     }
 
     @Test
@@ -44,7 +43,7 @@ public class SchoolTest {
         List<Student> expected = new ArrayList<>();
         expected.add(new Student(50, "Surname5"));
         expected.add(new Student(60, "Surname6"));
-        assertEquals(rsl, expected);
+        assertEquals(expected, rsl);
     }
 
     @Test
@@ -63,6 +62,6 @@ public class SchoolTest {
         expected.add(new Student(10, "Surname1"));
         expected.add(new Student(30, "Surname3"));
         expected.add(new Student(40, "Surname4"));
-        assertEquals(rsl, expected);
+        assertEquals(expected, rsl);
     }
 }

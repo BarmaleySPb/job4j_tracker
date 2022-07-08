@@ -6,19 +6,23 @@ import java.util.stream.Stream;
 
 public class Analyze {
 
+    private Analyze() {
+
+    }
+
     public static double averageScore(Stream<Pupil> stream) {
         return stream.flatMap(pupil -> pupil.getSubjects().stream())
                 .mapToInt(Subject::getScore)
                 .average()
-                .getAsDouble();
+                .orElseThrow();
     }
 
     public static List<Tuple> averageScoreByPupil(Stream<Pupil> stream) {
         return stream.map(pupil -> new Tuple(pupil.getName(), pupil.getSubjects().stream()
                 .mapToInt(Subject::getScore)
                 .average()
-                .getAsDouble()))
-                .collect(Collectors.toList());
+                .orElseThrow()))
+                .toList();
     }
 
     public static List<Tuple> averageScoreBySubject(Stream<Pupil> stream) {
@@ -28,14 +32,14 @@ public class Analyze {
                         Collectors.averagingDouble(Subject::getScore)))
                 .entrySet()
                         .stream().map(subj -> new Tuple(subj.getKey(), subj.getValue()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public static Tuple bestStudent(Stream<Pupil> stream) {
         return stream.map(pupil -> new Tuple(pupil.getName(), pupil.getSubjects().stream()
                 .mapToInt(Subject::getScore)
                 .sum()))
-                .max(Comparator.comparingDouble(Tuple::getScore)).get();
+                .max(Comparator.comparingDouble(Tuple::getScore)).orElseThrow();
     }
 
     public static Tuple bestSubject(Stream<Pupil> stream) {
@@ -45,6 +49,6 @@ public class Analyze {
                                 Collectors.summingInt(Subject::getScore)))
                 .entrySet()
                 .stream().map(subj -> new Tuple(subj.getKey(), subj.getValue()))
-                .max(Comparator.comparingDouble(Tuple::getScore)).get();
+                .max(Comparator.comparingDouble(Tuple::getScore)).orElseThrow();
     }
 }

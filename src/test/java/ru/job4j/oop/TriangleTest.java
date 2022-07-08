@@ -13,6 +13,6 @@ public class TriangleTest {
         Point c = new Point(0, 4);
         Triangle triangle = new Triangle(a, b, c);
         double rsl = triangle.area();
-        assertEquals(rsl, 8, 0.001);
+        assertEquals(8, rsl, 0.001);
     }
 }
