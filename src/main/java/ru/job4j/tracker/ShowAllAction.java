@@ -19,7 +19,7 @@ public class ShowAllAction implements UserAction {
         if (!tracker.findAll().isEmpty()) {
             tracker.findAllByReact(out::println);
         } else {
-            out.println("Хранилище еще не содержит заявок.");
+            out.println("The repository does not contain requests yet.");
         }
         return true;
     }
