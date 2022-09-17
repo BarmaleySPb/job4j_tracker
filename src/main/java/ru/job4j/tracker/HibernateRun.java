@@ -23,7 +23,7 @@ public class HibernateRun {
 
             Session session = sf.openSession();
             session.beginTransaction();
-            session.save(item);
+            session.persist(item);
             session.getTransaction().commit();
             session.close();
 
@@ -43,7 +43,7 @@ public class HibernateRun {
     public static Item create(Item item, SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
-        session.save(item);
+        session.persist(item);
         session.getTransaction().commit();
         session.close();
         return item;
@@ -52,7 +52,7 @@ public class HibernateRun {
     public static void update(Item item, SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
-        session.update(item);
+        session.refresh(item);
         session.getTransaction().commit();
         session.close();
     }
@@ -62,7 +62,7 @@ public class HibernateRun {
         session.beginTransaction();
         Item item = new Item(null);
         item.setId(id);
-        session.delete(item);
+        session.remove(item);
         session.getTransaction().commit();
         session.close();
     }
@@ -70,7 +70,7 @@ public class HibernateRun {
     public static List<Item> findAll(SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
-        List result = session.createQuery("from ru.job4j.tracker.Item").list();
+        List<Item> result = session.createQuery("from ru.job4j.tracker.Item", Item.class).list();
         session.getTransaction().commit();
         session.close();
         return result;

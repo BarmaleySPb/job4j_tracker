@@ -1,6 +1,7 @@
 package ru.job4j.config;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 @Entity
@@ -43,6 +44,14 @@ public class Car {
 
     public void setCreated(Timestamp created) {
         this.created = created;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     @Override

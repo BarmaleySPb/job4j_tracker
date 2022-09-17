@@ -1,15 +1,17 @@
 package ru.job4j.tracker;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Entity
 @Table(name = "items")
 public class Item implements Comparable<Item> {
-
+    @Transient
+    private final SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -22,14 +24,12 @@ public class Item implements Comparable<Item> {
 
     public Item(String name) {
         this.name = name;
-        this.created = Timestamp.from(Instant.now());
         this.description = "";
     }
 
     public Item(String name, int id) {
         this.name = name;
         this.id = id;
-        this.created = Timestamp.from(Instant.now());
         this.description = "";
     }
 
@@ -52,6 +52,10 @@ public class Item implements Comparable<Item> {
 
     public Timestamp getCreated() {
         return created;
+    }
+
+    public void setCreated(Timestamp created) {
+        this.created = created;
     }
 
     public int getId() {
@@ -79,7 +83,7 @@ public class Item implements Comparable<Item> {
         return "Item{"
                  + "id=" + id
                  + ", name='" + name + '\''
-                 + ", created=" + created
+                 + ", created=" + format.format(created)
                  + ", description='" + description + '\''
                  + '}';
     }

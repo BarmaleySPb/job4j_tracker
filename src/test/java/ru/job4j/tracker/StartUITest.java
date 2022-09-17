@@ -46,7 +46,7 @@ public class StartUITest {
                         + "0. Add new Item" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
                         + "==== Create a new Item ====" + System.lineSeparator()
-                        + "Добавлена новая заявка: " + newItem + System.lineSeparator()
+                        + "Added new item: " + newItem + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. Add new Item" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator(),
@@ -72,8 +72,8 @@ public class StartUITest {
                 "Menu." + System.lineSeparator()
                         + "0. Replace item" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator()
-                        + "==== Edit new item ====" + System.lineSeparator()
-                        + "Заявка успешно изменена." + System.lineSeparator()
+                        + "==== Edit item ====" + System.lineSeparator()
+                        + "Edit item is done." + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. Replace item" + System.lineSeparator()
                         + "1. Exit program" + System.lineSeparator(),
@@ -204,8 +204,8 @@ public class StartUITest {
         rep.execute(input, tracker);
 
         String ln = System.lineSeparator();
-        assertEquals(out.toString(), "==== Edit new item ====" + ln
-                + "Заявка успешно изменена." + ln);
+        assertEquals(out.toString(), "==== Edit item ====" + ln
+                + "Edit item is done." + ln);
         assertEquals(replacedName, tracker.findAll().get(0).getName());
     }
 
@@ -221,8 +221,8 @@ public class StartUITest {
         rep.execute(input, tracker);
 
         String ln = System.lineSeparator();
-        assertEquals(out.toString(), "==== Edit new item ====" + ln
-                + "Заявка с ID: 0 не найдена" + ln);
+        assertEquals(out.toString(), "==== Edit item ====" + ln
+                + "Item with ID: 0 not found." + ln);
         assertEquals("Replaced item", tracker.findAll().get(0).getName());
     }
 
@@ -242,7 +242,7 @@ public class StartUITest {
         String ln = System.lineSeparator();
         assertEquals(
                 "==== Delete item ====" + ln
-                + "Заявка успешно удалена." + ln,
+                + "Item deleted." + ln,
                 out.toString());
     }
 
@@ -260,7 +260,7 @@ public class StartUITest {
         String ln = System.lineSeparator();
         assertEquals(
                 "==== Delete item ====" + ln
-                + "Заявка с ID: 0 не найдена." + ln,
+                + "Item with ID: 0 not found." + ln,
                 out.toString()
         );
     }
@@ -310,7 +310,7 @@ public class StartUITest {
         String ln = System.lineSeparator();
         assertEquals(
                 "==== Find item by ID ====" + ln
-                + "Заявка с ID: 0 не найдена" + ln,
+                + "Item with ID: 0 not found." + ln,
                 out.toString()
         );
     }

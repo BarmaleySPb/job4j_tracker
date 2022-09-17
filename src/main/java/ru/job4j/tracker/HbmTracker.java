@@ -16,14 +16,13 @@ public class HbmTracker implements Store {
 
     @Override
     public void init() {
-
     }
 
     @Override
     public Item add(Item item) {
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            session.save(item);
+            session.persist(item);
             session.getTransaction().commit();
         }
         return item;
@@ -52,7 +51,7 @@ public class HbmTracker implements Store {
         boolean result;
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            session.delete(findById(id));
+            session.remove(findById(id));
             session.getTransaction().commit();
             result = true;
         } catch (Exception e) {
@@ -63,10 +62,10 @@ public class HbmTracker implements Store {
 
     @Override
     public List<Item> findAll() {
-        List items;
+        List<Item> items;
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            items = session.createQuery("from Item").list();
+            items = session.createQuery("from Item", Item.class).list();
             session.getTransaction().commit();
         }
         return items;
@@ -76,7 +75,7 @@ public class HbmTracker implements Store {
         List<Item> items;
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            items = session.createQuery("from Item").list();
+            items = session.createQuery("from Item", Item.class).list();
             items.forEach(observe::receive);
             session.getTransaction().commit();
         }
@@ -84,10 +83,10 @@ public class HbmTracker implements Store {
 
     @Override
     public List<Item> findByName(String key) {
-        List items;
+        List<Item> items;
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            items = session.createQuery("from Item i where i.name = :key")
+            items = session.createQuery("from Item i where i.name = :key", Item.class)
                     .setParameter("key", key)
                     .list();
             session.getTransaction().commit();

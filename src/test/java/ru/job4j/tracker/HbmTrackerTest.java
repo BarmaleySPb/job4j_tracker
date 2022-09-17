@@ -1,75 +1,156 @@
 package ru.job4j.tracker;
 
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.shouldHaveThrown;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class HbmTrackerTest {
+class HbmTrackerTest {
 
-    @Test
-    public void whenAddItem() {
-        Store store = new HbmTracker();
-        store.add(new Item("item"));
-        List<Item> items = store.findAll();
-        assertEquals(1, items.size());
-        assertEquals("item", items.get(0).getName());
+    private static Store tracker;
+
+    @BeforeEach
+    public void init() {
+        tracker = new HbmTracker();
     }
 
     @Test
-    public void whenReplaceItem() {
-        Store store = new HbmTracker();
-        int idForReplace = store.add(new Item("item")).getId();
+    void whenAddItem() {
+        tracker.add(new Item("item"));
+        List<Item> items = tracker.findAll();
+        assertThat(items).hasSize(1);
+        assertThat(items.get(0).getName()).isEqualTo("item");
+    }
+
+    @Test
+    void whenReplaceItem() {
+        int idForReplace = tracker.add(new Item("item")).getId();
         Item replaceItem = new Item("replace Item");
-        store.replace(idForReplace, replaceItem);
-        assertEquals("replace Item", store.findById(idForReplace).getName());
+        tracker.replace(idForReplace, replaceItem);
+        assertThat(tracker.findById(idForReplace).getName()).isEqualTo("replace Item");
     }
 
     @Test
-    public void whenDeleteItem() {
-        Store store = new HbmTracker();
-        int id = store.add(new Item("item")).getId();
-        store.delete(id);
-        assertTrue(store.findAll().isEmpty());
+    void whenDeleteItem() {
+        int id = tracker.add(new Item("item")).getId();
+        tracker.delete(id);
+        assertThat(tracker.findAll()).isEmpty();
     }
 
     @Test
-    public void whenDeleteItemThenFalse() {
-        Store store = new HbmTracker();
-        store.add(new Item("item"));
-        assertFalse(store.delete(2));
+    void whenDeleteItemThenFalse() {
+        tracker.add(new Item("item"));
+        assertThat(tracker.delete(2)).isFalse();
     }
 
     @Test
-    public void whenFindAll() {
-        Store store = new HbmTracker();
-        Item firstItem = store.add(new Item("first item"));
-        Item secondItem = store.add(new Item("second item"));
-        assertEquals(List.of(firstItem, secondItem), store.findAll());
+    void whenFindAll() {
+        Item firstItem = tracker.add(new Item("first item"));
+        Item secondItem = tracker.add(new Item("second item"));
+        assertThat(tracker.findAll()).isEqualTo(List.of(firstItem, secondItem));
     }
 
     @Test
-    public void whenFindByName() {
-        Store store = new HbmTracker();
-        Item firstItem = store.add(new Item("first item"));
-        Item secondItem = store.add(new Item("second item"));
-        Item thirdItem = store.add(
-                new Item("second item", Timestamp.from(Instant.now()), "description")
+    void whenFindByName() {
+        Item firstItem = tracker.add(new Item("first item"));
+        Item secondItem = tracker.add(new Item("second item"));
+        Item thirdItem = tracker.add(new Item("second item"));
+        assertThat(tracker.findByName("second item")).isEqualTo(List.of(secondItem, thirdItem));
+    }
+
+    @Test
+    void whenFindById() {
+        Item firstItem = tracker.add(new Item("first item"));
+        Item secondItem = tracker.add(new Item("second item"));
+        Item thirdItem = tracker.add(new Item("second item"));
+        assertThat(tracker.findById(2)).isEqualTo(secondItem);
+    }
+
+    @Test
+    void whenReplaceItemWithMock() {
+        Output out = new StubOutput();
+        tracker.add(new Item("Replaced item"));
+        String replacedName = "New item name";
+        ReplaceAction rep = new ReplaceAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(1);
+        when(input.askStr(any(String.class))).thenReturn(replacedName);
+
+        rep.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        String expected = out.toString();
+        assertThat(expected).isEqualTo("==== Edit item ====" + ln + "Edit item is done." + ln);
+        assertThat(tracker.findAll().get(0).getName()).isEqualTo(replacedName);
+    }
+
+    @Test
+    void whenDeleteItemWithMock() {
+        Output out = new StubOutput();
+        tracker.add(new Item("Item for delete"));
+        DeleteAction delete = new DeleteAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(1);
+
+        delete.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        String expected = out.toString();
+        assertThat(expected).isEqualTo("==== Delete item ====" + ln + "Item deleted." + ln);
+        assertThat(tracker.findById(1)).isNull();
+        assertThat(tracker.findAll()).isEmpty();
+    }
+
+    @Test
+    void whenFindByIdWithMock() {
+        Output out = new StubOutput();
+        Item item = new Item("Item for find");
+        tracker.add(item);
+        FindByIdAction findById = new FindByIdAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(1);
+
+        findById.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        String expected = out.toString();
+        assertThat(expected).isEqualTo("==== Find item by ID ====" + ln + item + ln);
+        assertThat(tracker.findById(1)).isEqualTo(item);
+    }
+
+    @Test
+    void whenFindByNameWithMock() {
+        Output out = new StubOutput();
+        Item firstItem = new Item("firstItem");
+        Item secondItem = new Item("secondItem");
+        Item thirdItem = new Item("secondItem");
+        tracker.add(firstItem);
+        tracker.add(secondItem);
+        tracker.add(thirdItem);
+        FindByNameAction findById = new FindByNameAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askStr(any(String.class))).thenReturn("secondItem");
+
+        findById.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        String expected = out.toString();
+        assertThat(expected).isEqualTo(
+                "==== Find items by name ====" + ln + secondItem + ln + thirdItem + ln
         );
-        assertEquals(List.of(secondItem, thirdItem), store.findByName("second item"));
-    }
-
-    @Test
-    public void whenFindById() {
-        Store store = new HbmTracker();
-        Item firstItem = store.add(new Item("first item"));
-        Item secondItem = store.add(new Item("second item"));
-        Item thirdItem = store.add(
-                new Item("second item", Timestamp.from(Instant.now()), "description")
-        );
-        assertEquals(secondItem, store.findById(2));
     }
 }
