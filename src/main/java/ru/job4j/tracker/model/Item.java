@@ -1,6 +1,8 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -9,6 +11,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "items")
+@Getter
+@Setter
 public class Item implements Comparable<Item> {
     @Transient
     private final SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
@@ -43,38 +47,6 @@ public class Item implements Comparable<Item> {
         this.name = name;
         this.id = id;
         this.created = created;
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Timestamp getCreated() {
-        return created;
-    }
-
-    public void setCreated(Timestamp created) {
-        this.created = created;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 

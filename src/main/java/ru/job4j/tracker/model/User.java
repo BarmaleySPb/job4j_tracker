@@ -1,10 +1,10 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.model;
 
 public class User {
 
-    private int id;
-    private String username;
-    private String password;
+    private final int id;
+    private final String username;
+    private final String password;
 
     public User(int id, String username, String password) {
         this.id = id;
